@@ -121,11 +121,11 @@ search:
     page: 1
 
   rows:
-    selector: tr[data-torrent-id]:has(a[href*="/torrents/download/"]), table > tbody > tr:has(a[href*="/torrents/download/"])
+    selector: tr[data-torrent-id]:has(a[href*="/torrents/download/"]), table > tbody > tr:has(a[href*="/torrents/download/"]):has(a[href*="/torrents/"]:not([href*="/download/"]):not([href*="/similar/"]):not([href*="/peers"]):not([href*="/history"]))
 
   fields:
     title_raw:
-      selector: a.torrent-search--list__name, a.view-torrent, a[href*="/torrents/"]:not([href*="/download/"])
+      selector: a.torrent-search--list__name, a.view-torrent, a[href^="https://xbytesv2.li/torrents/"]:not([href*="/download/"]):not([href*="/similar/"]):not([href*="/peers"]):not([href*="/history"]), a[href^="/torrents/"]:not([href*="/download/"]):not([href*="/similar/"]):not([href*="/peers"]):not([href*="/history"])
       filters:
         - name: trim
     category:
@@ -145,7 +145,7 @@ search:
         - name: re_replace
           args: ["UHDRip", "BDRip"]
     details:
-      selector: a.torrent-search--list__name, a.view-torrent, a[href*="/torrents/"]:not([href*="/download/"])
+      selector: a.torrent-search--list__name, a.view-torrent, a[href^="https://xbytesv2.li/torrents/"]:not([href*="/download/"]):not([href*="/similar/"]):not([href*="/peers"]):not([href*="/history"]), a[href^="/torrents/"]:not([href*="/download/"]):not([href*="/similar/"]):not([href*="/peers"]):not([href*="/history"])
       attribute: href
     download:
       selector: a[href*="/torrents/download/"]
