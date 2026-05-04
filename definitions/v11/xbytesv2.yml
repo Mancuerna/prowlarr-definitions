@@ -107,7 +107,6 @@ search:
     - path: torrents
 
   inputs:
-    $raw: "{{ range .Categories }}&category={{.}}{{end}}"
     name: "{{ .Keywords }}"
     seasonNumber: "{{ .Query.Season }}"
     episodeNumber: "{{ .Query.Ep }}"
@@ -125,13 +124,22 @@ search:
     selector: tr[data-torrent-id]:has(a[href*="/torrents/download/"]), table > tbody > tr:has(a[href*="/torrents/download/"])
 
   fields:
-    category:
-      selector: :root
-      attribute: data-category-id
-    title:
+    title_raw:
       selector: a.torrent-search--list__name, a.view-torrent, a[href*="/torrents/"]:not([href*="/download/"])
       filters:
         - name: trim
+    category:
+      text: "{{ .Result.title_raw }}"
+      filters:
+        - name: re_replace
+          args: ["(?i).*(/S\\d{1,2}|/S\\d{1,2}E\\d{1,2}|Temporada|Miniserie).*", "25"]
+        - name: re_replace
+          args: ["(?i).*(/FLAC|/MP3).*", "39"]
+        - name: re_replace
+          args: ["^(?!25$|39$).*$", "17"]
+    title:
+      text: "{{ .Result.title_raw }}"
+      filters:
         - name: re_replace
           args: ["^ *\\[[^\\]]*\\] *", ""]
         - name: re_replace
