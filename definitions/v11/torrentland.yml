@@ -78,6 +78,9 @@ login:
       attribute: value
   error:
     - selector: div#ERROR_COPY
+  test:
+    path: torrents
+    selector: form[action$="/logout"], a[href*="/logout"], a[href*="/users/"]
 
 search:
   paths:
@@ -101,7 +104,7 @@ search:
 
   rows:
     # Pre-release/VIP torrents do not have a download link.
-    selector: table > tbody > tr:has(a[href*="/download/"])
+    selector: table > tbody > tr:has(a[href*="/torrents/download/"])
 
   fields:
     categorydesc_optional:
