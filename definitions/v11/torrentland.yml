@@ -83,8 +83,12 @@ login:
     selector: form[action$="/logout"], a[href*="/logout"], a[href*="/users/"]
 
 download:
+  selectors:
+    - selector: a[href^="/torrents/download/"], a[href*="/torrents/download/"]
+      attribute: href
   headers:
     User-Agent: ["Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.35"]
+    Referer: ["{{ .Config.sitelink }}"]
 
 search:
   paths:
