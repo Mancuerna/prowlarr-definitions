@@ -5,6 +5,7 @@ description: "Torrentland is a Spanish private torrent tracker for movies, TV, a
 language: es-ES
 type: private
 encoding: UTF-8
+testLinkTorrent: false
 links:
   - https://torrentland.li/
 
@@ -88,7 +89,7 @@ download:
       attribute: href
   headers:
     User-Agent: ["Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.35"]
-    Referer: ["{{ .Config.sitelink }}"]
+    Referer: ["{{ .DownloadUri.AbsoluteUri }}"]
 
 search:
   paths:
@@ -145,7 +146,7 @@ search:
       selector: a.view-torrent
       attribute: href
     download:
-      selector: a[href*="/torrents/download/"]
+      selector: a.view-torrent
       attribute: href
     poster:
       selector: div.torrent-poster img
